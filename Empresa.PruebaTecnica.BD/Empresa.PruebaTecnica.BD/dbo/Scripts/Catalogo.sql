@@ -1,0 +1,1 @@
+﻿insert into Estatus (Descripcion) select 'Activo' union select 'Inactivo'

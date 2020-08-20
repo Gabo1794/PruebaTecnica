@@ -1,0 +1,180 @@
+<div class="login-page">
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align: center;"
+      >Inciar sesión / Registrarte</mat-card-title
+    >
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+      <mat-tab label="Ingresar">
+        <mat-card-content>
+          <form action="ValidarLogin" method="POST">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Usuario"
+                required
+                name="Usuario"
+                ngModel
+                #UsuarioLogin="ngModel"
+              />
+              <mat-error *ngIf="UsuarioLogin.invalid"
+                >El usuario es requerido</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Contraseña"
+                type="password"
+                required
+                minlength="6"
+                name="password"
+                ngModel
+                #ContrasenaLogin="ngModel"
+              />
+              <mat-error
+                *ngIf="ContrasenaLogin.errors && ContrasenaLogin.errors.required"
+              >
+                La contraseña es requerida
+              </mat-error>
+              <mat-error
+                *ngIf="ContrasenaLogin.errors && ContrasenaLogin.errors.minlength"
+              >
+                La contraseña debe ser de almenos 6 caracteres
+              </mat-error>
+            </mat-form-field>
+            <div *ngIf="mostarModalError">
+              <nz-alert
+                nzType="error"
+                nzMessage="{{ mensajeError }}"
+              ></nz-alert>
+            </div>
+            <button
+              (click)="
+                ValidarLogin({
+                  UsuarioLogin: UsuarioLogin.viewModel,
+                  ContrasenaLogin: ContrasenaLogin.viewModel
+                })
+              "
+              mat-raised-button
+              color="primary"
+              class="login-button"
+            >
+              Iniciar sesion
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-tab>
+      <mat-tab label="Registro">
+        <mat-card-content>
+          <form action="">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Usuario"
+                required
+                name="username"
+                ngModel
+                #Usuario="ngModel"
+              />
+              <mat-error *ngIf="Usuario.invalid">
+                Usuario es requerido
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Correo"
+                required
+                name="email"
+                ngModel
+                #Correo="ngModel"
+              />
+              <mat-error *ngIf="Correo.invalid"
+                >El correo es requerido</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Contraseña"
+                type="password"
+                required
+                minlength="6"
+                name="password"
+                ngModel
+                #Contrasena="ngModel"
+              />
+              <mat-error
+                *ngIf="Contrasena.errors && Contrasena.errors.required"
+              >
+                La contraseña es requerida
+              </mat-error>
+              <mat-error
+                *ngIf="Contrasena.errors && Contrasena.errors.minlength"
+              >
+                La contraseña debe tener almenos 6 caracteres
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Confirmar contraseña"
+                type="password"
+                required
+                minlength="6"
+                name="reContrasena"
+                ngModel
+                #reContrasena="ngModel"
+              />
+              <mat-error
+                *ngIf="reContrasena.errors && reContrasena.errors.required"
+              >
+                Debes capturar de nuevo tu contraseña
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Selecciona el genero</mat-label>
+              <mat-select 
+                required
+                name="generoSelected"
+                ngModel
+                #generoSelected="ngModel"
+              >
+                <mat-option *ngFor="let genero of generos" [value]="genero.value">
+                  {{genero.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="generoSelected.errors && reContrasena.errors.required"
+              >
+                Debes capturar de nuevo tu contraseña
+              </mat-error>              
+            </mat-form-field>
+            <div *ngIf="mostarModalError">
+              <nz-alert
+                nzType="error"
+                nzMessage="{{ mensajeError }}"
+              ></nz-alert>
+            </div>            
+            <button
+              (click)="
+                CrearUsuario({
+                  Correo: Correo.viewModel,
+                  Usuario: Usuario.viewModel,
+                  Contrasena: Contrasena.viewModel,
+                  ValidateContrasena: reContrasena.viewModel,
+                  Sexo: generoSelected.viewModel == '' ? false : true
+                })
+              "
+              mat-raised-button
+              color="primary"
+              class="login-button"
+            >
+              Registrarte
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

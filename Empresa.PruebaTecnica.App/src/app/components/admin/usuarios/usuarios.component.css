@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+  }
+
+  [nz-button] {
+    margin-right: 8px;
+    margin-bottom: 12px;
+    width: 150px;
+  }
+
+.ant-layout-header{
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 15px;
+}
+
+[nz-button] {
+  margin-right: 8px;
+}

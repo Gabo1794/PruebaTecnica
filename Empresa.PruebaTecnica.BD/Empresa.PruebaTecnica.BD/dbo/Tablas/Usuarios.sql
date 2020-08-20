@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[Usuarios]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL,
+	[Correo] VARCHAR(70) NOT NULL,
+	[Usuario] VARCHAR(20) NOT NULL,
+	[Contrasena] VARCHAR(MAX) NOT NULL,
+	[Estatus] INT NOT NULL,
+	[Sexo] BIT NOT NULL,
+	[FechaCreacion] DATETIME NOT NULL,
+	CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT [FK_Estatus] FOREIGN KEY ([Estatus]) REFERENCES [dbo].[Estatus] ([Id])
+)
